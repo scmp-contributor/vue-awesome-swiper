@@ -84,7 +84,7 @@
         type: Object,
         required: false,
         default: () => ({})
-      ,
+      },
       cleanStylesOnDestroy: {
         type: Boolean,
         required: false,
