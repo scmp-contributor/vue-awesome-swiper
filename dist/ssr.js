@@ -74,10 +74,11 @@ var swiperDirective = function swiperDirective(globalOptions) {
       }
     },
     unbind: function unbind(el, binding, vnode) {
+      var cleanStylesOnDestroy = vnode.data.attrs.cleanStylesOnDestroy;
       var instanceName = getInstanceName(el, binding, vnode);
       var swiper = vnode.context[instanceName];
       if (swiper) {
-        swiper.destroy && swiper.destroy();
+        swiper.destroy && swiper.destroy(true, cleanStylesOnDestroy);
         delete vnode.context[instanceName];
       }
     }

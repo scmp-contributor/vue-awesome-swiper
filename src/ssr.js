@@ -77,7 +77,7 @@ const swiperDirective = globalOptions => {
 
       // Emit event in Vue directive
       const eventEmit = (vnode, name, data) => {
-        const handlers = (vnode.data && vnode.data.on) || 
+        const handlers = (vnode.data && vnode.data.on) ||
                          (vnode.componentOptions && vnode.componentOptions.listeners)
         if (handlers && handlers[name]) handlers[name].fns(data)
       }
@@ -110,10 +110,11 @@ const swiperDirective = globalOptions => {
 
     // Destroy this directive
     unbind(el, binding, vnode) {
+      const cleanStylesOnDestroy = vnode.data.attrs.cleanStylesOnDestroy
       const instanceName = getInstanceName(el, binding, vnode)
       const swiper = vnode.context[instanceName]
       if (swiper) {
-        swiper.destroy && swiper.destroy()
+        swiper.destroy && swiper.destroy(true, cleanStylesOnDestroy)
         delete vnode.context[instanceName]
       }
     }
